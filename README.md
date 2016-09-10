@@ -12,9 +12,11 @@ cp vwnd.4Xday.1981-2010.ltm.nc vwnd
 ncks -A uwnd.4Xday.1981-2010.ltm.nc vwnd
 mv vwnd wnd.4Xday.1981-2010.ltm.nc
 ~~~~
-interpolate.py will use the pressure surfaces within the wnd file to calculate any desired
-pressure level you want. In an ISA standard atmosphere:
 
+interpolate.py will use the pressure surfaces within the wnd file to calculate any desired
+pressure level you want, dumping the result to a binary file that you specify. In an ISA standard atmosphere:
+
+~~~~
   Feet     Millibar
   8000   =   753
   10000  =   697
@@ -28,6 +30,7 @@ pressure level you want. In an ISA standard atmosphere:
   36000  =   227
   39000  =   196
   42000  =   170
+~~~~
 
 Pick the millibar value according to the pressure altitude in feet you want. Say, 10000ft:
 
@@ -40,5 +43,21 @@ That will interpolate the source data to create the outputs for 10000ft, dumping
 To query it, use windspd.py:
 
 ~~~~
-python windspd.py 10000
+$ python windspd.py 10000.bin
+
+File looks good! Covers lat range [90.0, -90.0] and long range [0.0, 357.5]. Step size 2.5 degrees. 73.0 rows and 144.0 cols. Cycle range [1,1460].
+Enter a date string (MM/DD/YYYY). Leave blank for today:
+OK! Date = 09/10/2016, Day of year = 254
+Cycle within day? ( 1 = 00Z, 2 = 06Z, 3 = 12Z, 4 = 18Z): 4
+What latitude?: 40
+What longitude?: 170
+20 68
+Spd Offset: 42690523.0
+Dirn Offset: 42690525.0
+[1015.0, 20, 68] = 19.02kts @ 92.71deg
+Enter a date string (MM/DD/YYYY). Leave blank for today:
+OK! Date = 09/10/2016, Day of year = 254
+Cycle within day? ( 1 = 00Z, 2 = 06Z, 3 = 12Z, 4 = 18Z): ^C
+Bye!
+
 ~~~~
